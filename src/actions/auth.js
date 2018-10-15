@@ -61,11 +61,19 @@ export const login = (username, password) => dispatch => {
             .then(res => res.json())
             .then(({authToken}) => storeAuthInfo(authToken, dispatch))
             .catch(err => {
-                const {code} = err;
-                const message =
-                    code === 401
+                const {status} = err;
+                let message = 
+                //if the code is 401, display first message, otherwise display 2nd message
+                    status === 401
                         ? 'Incorrect username or password'
                         : 'Unable to login. Please try again';
+                // if(status === 401) {
+                //     message = 
+                //     'Incorrect username or password'
+                // } else {
+                //     message = 'Unable to login. Please try again'
+                // }  
+
                 dispatch(authError(err));
                 // Could not authenticate, so return a SubmissionError for Redux
                 // Form
