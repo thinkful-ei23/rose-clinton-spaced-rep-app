@@ -4,6 +4,8 @@ import {Link, Redirect} from 'react-router-dom';
 
 import LoginForm from './login-form';
 
+import './landing-page.css';
+
 export function LandingPage(props) {
     // If we are logged in redirect straight to the user's dashboard
     if (props.loggedIn) {
@@ -12,7 +14,18 @@ export function LandingPage(props) {
 
     return (
         <div className="home">
-            <h2>Welcome to Foo App</h2>
+            <img class="rezize" src="http://pluspng.com/img-png/png-female-scientist-education-female-lab-medical-science-scientist-woman-icon-512.png" width="100" height="100"
+                alt="PNG Female Scientist"/>
+            <img class="rezize" src="http://pluspng.com/img-png/png-female-scientist-chemist-chemistry-female-laborant-scientist-vial-women-icon-512.png" width="100" height="100"
+                alt="PNG Female Chemist"/>
+            <img class="rezize" src="https://images.onlinelabels.com/images/clip-art/j4p4n/Female%20Doctor-284473.png" width="100" height="100"
+                alt="Online Labels Female Doctor"/>        
+                <h3>Instructions</h3>
+                <p>
+                    See if you can identify these top women scientists.<br></br>
+                    Type the name that matches the person in the picture.<br></br>
+                    Use the description as a hint.
+                </p>
             <LoginForm />
             <Link to="/register">Register</Link>
         </div>
