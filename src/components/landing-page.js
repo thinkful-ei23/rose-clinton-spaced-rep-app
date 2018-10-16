@@ -14,11 +14,11 @@ export function LandingPage(props) {
 
     return (
         <div className="home">
-            <img className="resize" src="http://pluspng.com/img-png/png-female-scientist-education-female-lab-medical-science-scientist-woman-icon-512.png" 
+            <img src="https://i.imgur.com/nEA3Xp9.png" 
                 alt="PNG Female Scientist"/>
-            <img className="resize" src="http://pluspng.com/img-png/png-female-scientist-chemist-chemistry-female-laborant-scientist-vial-women-icon-512.png" 
+            <img src="https://i.imgur.com/iwTavbf.png" 
                 alt="PNG Female Chemist"/>
-            <img className="resize" src="https://images.onlinelabels.com/images/clip-art/j4p4n/Female%20Doctor-284473.png" 
+            <img src="https://i.imgur.com/rxfiji4.png" 
                 alt="Online Labels Female Doctor"/>        
                 <h3>Instructions</h3>
                 <p>

@@ -2,9 +2,3 @@
   text-align: center;
   /* background: turquoise; */
 }
-
-img.resize {
-  width: 100px;
-  height: 100px;
-  /* not working so for now I have this in html: width="100" height="100" */
-}
