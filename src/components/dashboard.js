@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
 import {fetchProtectedData} from '../actions/protected-data';
 import Game from './game';
+import { Route, withRouter } from 'react-router-dom';
+
 
 import './dashboard.css';
 
@@ -23,7 +25,8 @@ export class Dashboard extends React.Component {
                 <div className="display-score">
                     Your score is: 
                 </div>
-                <Game/>    
+                <Route exact path="/dashboard" component={Game}/>   
+ 
                 </div>
             </div>
         );
@@ -39,4 +42,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default requiresLogin()(connect(mapStateToProps)(Dashboard));
+export default withRouter(requiresLogin()(connect(mapStateToProps)(Dashboard)));
