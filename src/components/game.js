@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {fetchQuestion} from '../actions/fetchQuestion';
 import Question from './question';
+import { Redirect, Link } from 'react-router-dom';
+// import Progress from './progress';
 
 class Game extends React.Component {
   constructor(props) {
@@ -9,7 +11,7 @@ class Game extends React.Component {
     this.state = {
       message: '',
       userAnswer: '',
-      score: ''
+      score: 0
     }
   }
 
@@ -35,14 +37,18 @@ class Game extends React.Component {
     let message;
 
     if(userAnswer === this.props.answer) {
+      let score;
       message = 'Correct!'
       this.setState({
         message,
+        score: score + 10
       });
     } else {
+      let score;
       message = `The correct answer is: ${this.props.answer}`;
       this.setState({
         message,
+        score: score - 10
       });
     }
     console.log(message);
@@ -55,13 +61,11 @@ class Game extends React.Component {
     });
     this.props.dispatch(fetchQuestion());
   }
-
-  displayProgress() {
-    console.log(this.props.score); 
-  }
+   
 
   render() {
     let feedback;
+    
     if (this.state.message) {
       feedback = (
         <p>{this.state.message}</p>
@@ -74,6 +78,8 @@ class Game extends React.Component {
         </form>
       )
     }
+    
+
 
     return (
     <main className="game"> 
@@ -82,8 +88,8 @@ class Game extends React.Component {
       {feedback}
 
       <button className="next-button" onClick={() =>this.displayNextQuestion()}>Next Question</button>
-
-      <button className="progress-button" onClick={() =>this.displayProgress()}>Progress</button>
+      <Link to ="/progress">Progress</Link>
+      {/* <button className="progress-button" onClick={() =>this.displayProgress()}>Progress</button> */}
     </main>   
     );
     
