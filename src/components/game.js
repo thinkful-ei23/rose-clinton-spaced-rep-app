@@ -1,18 +1,22 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {fetchQuestion} from '../actions/fetchQuestion';
+import Question from './question';
 
 class Game extends React.Component {
-  componentDidMount() {
-    this.props.dispatch(fetchQuestion()); //will get question from user db
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: '',
+      userAnswer: '',
+      answer: '',
+      questionAnswered: false,
+      score: ''
+    }
   }
 
-  state = {
-    message: '',
-    userAnswer: '',
-    answer: '',
-    questionAnswered: false,
-    score: ''
+  componentDidMount() {
+    this.props.dispatch(fetchQuestion()); //will get question from user db
   }
 
   onSubmit(e) {
@@ -28,7 +32,7 @@ class Game extends React.Component {
         message,
       });
     } else {
-      const message = 'The correct answer is: '
+      const message = `The correct answer is: ${this.props.question.answer}`;
       this.setState({
         message,
       });
@@ -59,7 +63,7 @@ class Game extends React.Component {
 
       return (
       <main className="game"> 
-
+        <Question />
         <div>
           {/* {this.props.question.name} */}
           {/* <form onSubmit={(userAnswer) => submitResponse(userAnswer)}> */}
