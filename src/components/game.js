@@ -7,40 +7,77 @@ class Game extends React.Component {
     this.props.dispatch(fetchQuestion()); //will get question from user db
   }
 
+  state = {
+    message: '',
+    userAnswer: '',
+    answer: '',
+    questionAnswered: false,
+    score: ''
+  }
+
+  onSubmit() {
+    const userAnswer = this.state.answer;
+    this.setState({
+      questionAnswered: true,
+    });
+
+    if(userAnswer === this.props.question.answer) {
+      this.setState({
+        message: 'Correct!'
+      });
+    } else {
+      this.setState({
+        message: 'The correct answer is: '
+      });
+    }
+  }
+
   displayNextQuestion() {
     this.props.dispatch(fetchQuestion());
   }
 
+  displayProgress() {
+    console.log(this.props.score); 
+  }
+
   render() {
-    let question;
-    if(this.props.question) {
-      question = this.props.question;
-    }
-    let userResponse; 
-    const submitResponse = (value) => {
-      value.preventDefault();
-      // this.props.dispatch(displayAnswer(userResponse.value))
-    }
-    if(this.props.answer) { 
+    let answer = this.props.answer;
+    let question = this.props.question;
+    let userAnswer = this.props.userAnswer;
+
+    // if(this.props.answer) { 
+    //   return (
+    //     <div>
+    //       {this.props.answer}
+    //       <button onClick={() => this.displayNextQuestion}>Next Question</button>
+    //     </div>
+    //   );
+    // }
+
       return (
+      <main className="game"> 
+
         <div>
-          {this.props.answer}
-          <button onClick={() => this.displayNextQuestion}>Next Question</button>
-        </div>
-      );
-    }
-    else {
-      return (
-        <div>
-          {this.props.question.name}
-          <form onSubmit={(userResponse) => submitResponse(userResponse)}>
-            <input id="answer" ref={input => (userResponse = input)}
-            type="text"></input>
-            <button type="submit"></button>
+          {/* {this.props.question.name} */}
+          {/* <form onSubmit={(userAnswer) => submitResponse(userAnswer)}> */}
+
+          <form onSubmit={e => this.onSubmit(e)}>
+            <input id="answer" ref={input => (userAnswer = input)} type="text"></input>
+            <button type="submit">Submit</button>
           </form>
         </div>
+
+        <div>
+          <button className="next-button" onClick={() =>this.displayNextQuestion()}>Next Question</button>
+        </div>
+
+        <div>
+          <button className="progress-button" onClick={() =>this.displayProgress()}>Progress</button>
+        </div>
+
+      </main>   
       );
-    }
+    
   }
 }
 
