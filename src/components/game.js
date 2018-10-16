@@ -15,28 +15,42 @@ class Game extends React.Component {
     }
   }
 
+  setUserAnswer(userAnswer) {
+    this.setState({
+      userAnswer
+    })
+  }
+
   componentDidMount() {
     this.props.dispatch(fetchQuestion()); //will get question from user db
   }
 
   onSubmit(e) {
     e.preventDefault();
-    const userAnswer = this.state.answer;
+    const userAnswer = this.userAnswer.value.trim();
+    console.log(userAnswer);
+
     this.setState({
       questionAnswered: true,
+      userAnswer,
+
     });
 
-    if(userAnswer === this.props.question.answer) {
-      const message = 'Correct!'
+    let message;
+
+    if(userAnswer === this.props.answer) {
+      message = 'Correct!'
       this.setState({
         message,
       });
     } else {
-      const message = `The correct answer is: ${this.props.question.answer}`;
+      message = `The correct answer is: ${this.props.answer}`;
       this.setState({
         message,
       });
     }
+    console.log(message);
+    console.log(this.props.answer);
   }
 
   displayNextQuestion() {
@@ -69,7 +83,10 @@ class Game extends React.Component {
           {/* <form onSubmit={(userAnswer) => submitResponse(userAnswer)}> */}
 
           <form onSubmit={e => this.onSubmit(e)}>
-            <input id="answer" ref={input => (userAnswer = input)} type="text"></input>
+            <input type="text" ref={input => this.userAnswer = input}/>
+            {/* <input className="user-answer" type="text" id="user-answer"
+            onChange={e => this.setUserAnswer(e.target.value)}
+            ref={input => (this.input =input)}/> */}
             <button type="submit">Submit</button>
           </form>
         </div>
@@ -90,8 +107,8 @@ class Game extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    question: state.question,
-    answer: state.answer
+    question: state.question.question,
+    answer: state.question.question.name
   }
 }
 
