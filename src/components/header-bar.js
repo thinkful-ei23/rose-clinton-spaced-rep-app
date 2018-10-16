@@ -23,11 +23,10 @@ export class HeaderBar extends React.Component {
             <main>
             <div className="header-bar">
                 <h1>Un-Hidden Figures</h1>
-                <div className="logout-button">
+            </div>
+            <div className="logout-button">
                 {logOutButton}
             </div>
-            </div>
-            
             </main>
         );
     }
