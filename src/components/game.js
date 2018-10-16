@@ -22,12 +22,14 @@ class Game extends React.Component {
     });
 
     if(userAnswer === this.props.question.answer) {
+      const message = 'Correct!'
       this.setState({
-        message: 'Correct!'
+        message,
       });
     } else {
+      const message = 'The correct answer is: '
       this.setState({
-        message: 'The correct answer is: '
+        message,
       });
     }
   }
