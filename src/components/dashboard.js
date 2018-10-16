@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
 import {fetchProtectedData} from '../actions/protected-data';
+import Game from './game';
 
 import './dashboard.css';
 
@@ -21,7 +22,8 @@ export class Dashboard extends React.Component {
                     Hello, {this.props.username}!
                 <div className="display-score">
                     Your score is: 
-                </div>    
+                </div>
+                <Game/>    
                 </div>
             </div>
         );
