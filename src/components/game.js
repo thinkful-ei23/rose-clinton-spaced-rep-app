@@ -1,9 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchQuestion} from '../actions/fetchQuestion';
+import {fetchQuestion} from '../actions/game';
 import Question from './question';
-import { Redirect, Link } from 'react-router-dom';
-// import Progress from './progress';
+import { Link } from 'react-router-dom';
 
 class Game extends React.Component {
   constructor(props) {
@@ -15,12 +14,6 @@ class Game extends React.Component {
     }
   }
 
-  setUserAnswer(userAnswer) {
-    this.setState({
-      userAnswer
-    })
-  }
-
   componentDidMount() {
     this.props.dispatch(fetchQuestion()); //will get question from user db
   }
@@ -28,14 +21,11 @@ class Game extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     const userAnswer = this.userAnswer.value.trim();
-    console.log(userAnswer);
-
     this.setState({
       userAnswer,
     });
 
     let message;
-
     if(userAnswer === this.props.answer) {
       let score;
       message = 'Correct!'
@@ -45,14 +35,12 @@ class Game extends React.Component {
       });
     } else {
       let score;
-      message = `The correct answer is: ${this.props.answer}`;
+      message = `You said: "${userAnswer}". The correct answer is: "${this.props.answer}"`;
       this.setState({
         message,
         score: score - 10
       });
     }
-    console.log(message);
-    console.log(this.props.answer);
   }
 
   displayNextQuestion() {
@@ -61,17 +49,15 @@ class Game extends React.Component {
     });
     this.props.dispatch(fetchQuestion());
   }
-   
-
+  
   render() {
-    let feedback;
-    
+    let answer;
     if (this.state.message) {
-      feedback = (
+      answer = (
         <p>{this.state.message}</p>
       );
     } else {
-      feedback = (
+      answer = (
         <form onSubmit={e => this.onSubmit(e)}>
           <input type="text" ref={input => this.userAnswer = input}/>
           <button type="submit">Submit</button>
@@ -79,29 +65,30 @@ class Game extends React.Component {
       )
     }
     
-
-
     return (
-    <main className="game"> 
+    <main className="game">
       <Question />
-
-      {feedback}
-
-      <button className="next-button" onClick={() =>this.displayNextQuestion()}>Next Question</button>
-      <Link to ="/progress">Progress</Link>
-      {/* <button className="progress-button" onClick={() =>this.displayProgress()}>Progress</button> */}
-    </main>   
+      {answer}
+      <button className="next-button" onClick={() =>this.displayNextQuestion()}>
+        Next Question
+      </button>
+      <Link to ="/progress">
+        <button className="progress-button">
+          Progress
+        </button>
+      </Link>
+    </main>
     );
-    
   }
 }
 
 const mapStateToProps = state => {
-  if (state.question.question) {
+  if (state.game.question) {
     return {
-      question: state.question.question,
-      answer: state.question.question.name
+      answer: state.game.question.scientist.name
     }
+  } else {
+    return {};
   }
 }
 

@@ -1,4 +1,4 @@
-import * as actions from '../actions/fetchQuestion';
+import * as actions from '../actions/game';
 
 const initialState = {
   question: null,

@@ -18,13 +18,13 @@ export const fetchQuestionError = (error) => ({
 });
 
 //GET endpoint 
-//fetch question: api/users/questions
+//fetch question: api/questions
 export const fetchQuestion = () => (dispatch, getState) => {
   dispatch(fetchQuestionRequest());
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/users/questions`, {
+  return fetch(`${API_BASE_URL}/questions`, {
     method: 'GET',
-    header: {
+    headers: {
       Authorization: `Bearer ${authToken}`
     }
   }).then(res => {

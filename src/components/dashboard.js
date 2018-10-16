@@ -1,45 +1,50 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
-import {fetchProtectedData} from '../actions/protected-data';
 import Game from './game';
-import { Route, withRouter } from 'react-router-dom';
-
-
 import './dashboard.css';
 
 export class Dashboard extends React.Component {
-    componentDidMount() {
-        this.props.dispatch(fetchProtectedData());
+  render() {
+    let name;
+    if (this.props.firstName) {
+      name = this.props.firstName;
+    } else {
+      name = this.props.username;
     }
+    
+    return (
+      <div className="dashboard">
+        <p className="dashboard-username">
+          Username: {this.props.username}
+        </p>
 
-    render() {
-        return (
-            <div className="dashboard">
-                <div className="dashboard-username">
-                    Username: {this.props.username}
-                </div>
-                <div className="dashboard-name">Name: {this.props.name}</div>
-                <div className="display-username">
-                    Hello, {this.props.username}!
-                <div className="display-score">
-                    Your score is: 
-                </div>
-                <Route exact path="/dashboard" component={Game}/>   
- 
-                </div>
-            </div>
-        );
+        <p className="dashboard-name">
+          Name: {this.props.fullName}
+        </p>
+
+        <p className="display-username">
+          Hello, {name}!
+        </p>
+        
+        <p className="display-score">
+          Your score is: 
+        </p>
+
+        <Game />
+      </div>
+      );
     }
-}
-
-const mapStateToProps = state => {
+  }
+  
+  const mapStateToProps = state => {
     const {currentUser} = state.auth;
     return {
-        username: state.auth.currentUser.username,
-        name: `${currentUser.firstName} ${currentUser.lastName}`,
-        protectedData: state.protectedData.data
+      username: currentUser.username,
+      firstName: currentUser.firstName,
+      fullName: `${currentUser.firstName} ${currentUser.lastName}`
     };
-};
-
-export default withRouter(requiresLogin()(connect(mapStateToProps)(Dashboard)));
+  };
+  
+  export default requiresLogin()(connect(mapStateToProps)(Dashboard));
+  
