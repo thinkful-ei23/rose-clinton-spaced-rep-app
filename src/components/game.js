@@ -9,8 +9,6 @@ class Game extends React.Component {
     this.state = {
       message: '',
       userAnswer: '',
-      answer: '',
-      questionAnswered: false,
       score: ''
     }
   }
@@ -31,9 +29,7 @@ class Game extends React.Component {
     console.log(userAnswer);
 
     this.setState({
-      questionAnswered: true,
       userAnswer,
-
     });
 
     let message;
@@ -54,6 +50,9 @@ class Game extends React.Component {
   }
 
   displayNextQuestion() {
+    this.setState({
+      message: ''
+    });
     this.props.dispatch(fetchQuestion());
   }
 
@@ -62,53 +61,41 @@ class Game extends React.Component {
   }
 
   render() {
-    let answer = this.props.answer;
-    let question = this.props.question;
-    let userAnswer = this.props.userAnswer;
-
-    // if(this.props.answer) { 
-    //   return (
-    //     <div>
-    //       {this.props.answer}
-    //       <button onClick={() => this.displayNextQuestion}>Next Question</button>
-    //     </div>
-    //   );
-    // }
-
-      return (
-      <main className="game"> 
-        <Question />
-        <div>
-          {/* {this.props.question.name} */}
-          {/* <form onSubmit={(userAnswer) => submitResponse(userAnswer)}> */}
-
-          <form onSubmit={e => this.onSubmit(e)}>
-            <input type="text" ref={input => this.userAnswer = input}/>
-            {/* <input className="user-answer" type="text" id="user-answer"
-            onChange={e => this.setUserAnswer(e.target.value)}
-            ref={input => (this.input =input)}/> */}
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-
-        <div>
-          <button className="next-button" onClick={() =>this.displayNextQuestion()}>Next Question</button>
-        </div>
-
-        <div>
-          <button className="progress-button" onClick={() =>this.displayProgress()}>Progress</button>
-        </div>
-
-      </main>   
+    let feedback;
+    if (this.state.message) {
+      feedback = (
+        <p>{this.state.message}</p>
       );
+    } else {
+      feedback = (
+        <form onSubmit={e => this.onSubmit(e)}>
+          <input type="text" ref={input => this.userAnswer = input}/>
+          <button type="submit">Submit</button>
+        </form>
+      )
+    }
+
+    return (
+    <main className="game"> 
+      <Question />
+
+      {feedback}
+
+      <button className="next-button" onClick={() =>this.displayNextQuestion()}>Next Question</button>
+
+      <button className="progress-button" onClick={() =>this.displayProgress()}>Progress</button>
+    </main>   
+    );
     
   }
 }
 
 const mapStateToProps = state => {
-  return {
-    question: state.question.question,
-    answer: state.question.question.name
+  if (state.question.question) {
+    return {
+      question: state.question.question,
+      answer: state.question.question.name
+    }
   }
 }
 
