@@ -15,7 +15,8 @@ class Game extends React.Component {
     score: ''
   }
 
-  onSubmit() {
+  onSubmit(e) {
+    e.preventDefault();
     const userAnswer = this.state.answer;
     this.setState({
       questionAnswered: true,
