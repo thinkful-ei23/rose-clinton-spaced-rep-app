@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
 import {fetchProtectedData} from '../actions/protected-data';
 
+import './dashboard.css';
+
 export class Dashboard extends React.Component {
     componentDidMount() {
         this.props.dispatch(fetchProtectedData());
@@ -15,8 +17,11 @@ export class Dashboard extends React.Component {
                     Username: {this.props.username}
                 </div>
                 <div className="dashboard-name">Name: {this.props.name}</div>
-                <div className="dashboard-protected-data">
+                <div className="display-username">
                     Hello, {this.props.username}!
+                <div className="display-score">
+                    Your score is: 
+                </div>    
                 </div>
             </div>
         );

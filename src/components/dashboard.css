@@ -1,0 +1,28 @@
+.dashboard {
+  margin: 0 auto;
+  width: 20em;
+}
+
+.display-username, .display-score {
+  margin: 5px auto;
+  margin-top: 0px;
+  width: 30em;
+  text-align: center justify;
+}
+
+.dashboard-username {
+  margin: 5px auto;
+  width: 30em;
+  text-align: center justify;
+  display: none;
+}
+
+.dashboard-name {
+  margin: 5px auto;
+  width: 30em;
+  text-align: center justify;
+  display: none;
+}
+
+
+
