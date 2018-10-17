@@ -15,7 +15,7 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchQuestion()); //will get question from user db
+    this.props.dispatch(fetchQuestion()); 
   }
 
   onSubmit(e) {
@@ -25,27 +25,30 @@ class Game extends React.Component {
       userAnswer,
     });
 
-    let message;
     if(userAnswer === this.props.answer) {
-      let score;
-      message = 'Correct!'
       this.setState({
-        message,
-        score: score + 10
+        score: this.state.score + 10,
+        message: `Correct! You scored 10 points! Your score is now ${this.state.score}`
       });
-    } else {
-      let score;
-      message = `You said: "${userAnswer}". The correct answer is: "${this.props.answer}"`;
+    } 
+    
+    else if(userAnswer !== this.props.answer){
       this.setState({
-        message,
-        score: score - 10
-      });
+        score: this.state.score - 10,
+        message:`You said: "${userAnswer}". The correct answer is: "${this.props.answer}"`
+      }); 
     }
+
+    console.log('userAnswer', userAnswer);
+    console.log('answer', this.props.answer);
+    console.log('Your score is: ', this.state.score);
+
   }
 
   displayNextQuestion() {
     this.setState({
-      message: ''
+      message: '',
+      // score: this.state.score
     });
     this.props.dispatch(fetchQuestion());
   }
@@ -85,7 +88,8 @@ class Game extends React.Component {
 const mapStateToProps = state => {
   if (state.game.question) {
     return {
-      answer: state.game.question.scientist.name
+      answer: state.game.question.scientist.name,
+      // score: state.score
     }
   } else {
     return {};

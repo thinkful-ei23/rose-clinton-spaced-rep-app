@@ -5,14 +5,17 @@ import {loadAuthToken} from './local-storage';
 import authReducer from './reducers/auth';
 import {setAuthToken, refreshAuthToken} from './actions/auth';
 import gameReducer from './reducers/game';
+import {composeWithDevTools} from 'redux-devtools-extension';
 
-const store = createStore(
+export const store = createStore(
     combineReducers({
         form: formReducer,
         auth: authReducer,
         game: gameReducer,
     }),
-    applyMiddleware(thunk)
+    composeWithDevTools(
+        applyMiddleware(thunk)
+    )
 );
 
 // Hydrate the authToken from localStorage if it exist
