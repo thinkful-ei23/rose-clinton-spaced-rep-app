@@ -5,6 +5,7 @@ import Game from './game';
 import './dashboard.css';
 
 export class Dashboard extends React.Component {
+
   render() {
     let name;
     if (this.props.firstName) {
@@ -28,7 +29,7 @@ export class Dashboard extends React.Component {
         </p>
         
         <p className="display-score">
-          Your score is: 
+          {/* Your score is: {this.props.score} */}
         </p>
 
         <Game />
