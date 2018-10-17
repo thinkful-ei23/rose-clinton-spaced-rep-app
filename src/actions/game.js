@@ -17,6 +17,22 @@ export const fetchQuestionError = (error) => ({
   error
 });
 
+export const POST_ANSWER_REQUEST = 'POST_ANSWER_REQUEST';
+export const postAnswerRequest = () => ({
+  type: POST_ANSWER_REQUEST
+});
+
+export const POST_ANSWER_SUCCESS = 'POST_ANSWER_SUCCESS';
+export const postAnswerSuccess = () => ({
+  type: POST_ANSWER_SUCCESS, 
+});
+
+export const POST_ANSWER_ERROR = 'POST_ANSWER_ERROR';
+export const postAnswerError = (error) => ({
+  type: POST_ANSWER_ERROR,
+  error
+});
+
 //GET endpoint 
 //fetch question: api/questions
 export const fetchQuestion = () => (dispatch, getState) => {
@@ -39,12 +55,20 @@ export const fetchQuestion = () => (dispatch, getState) => {
   }); 
 };
 
-
-//PUT endpoint
-//record the user's response and score
-//api/users/questions 
-
-//front end checks if right
-//store: correct answers, score
-//score will be updated 
-//score gets stored in backend  
+export const postAnswer = (userAnswer) => (dispatch, getState) => {
+  dispatch(postAnswerRequest());
+  const authToken = getState().auth.authToken;
+  const data = {userAnswer};
+  return fetch(`${API_BASE_URL}/questions/answers`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      Authorization: `Bearer ${authToken}`
+    },
+    body: JSON.stringify(data), 
+  }).then (() => {
+    dispatch(postAnswerSuccess());
+  }).catch(err => {
+      dispatch(postAnswerError(err));
+  }); 
+};

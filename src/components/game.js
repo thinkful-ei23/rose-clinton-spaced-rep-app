@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchQuestion} from '../actions/game';
+import {fetchQuestion, postAnswer} from '../actions/game';
 import Question from './question';
 import { Link } from 'react-router-dom';
 
@@ -20,9 +20,11 @@ class Game extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const userAnswer = this.userAnswer.value.trim();
 
+    const userAnswer = this.userAnswer.value.trim();
+    
     if(userAnswer === this.props.answer) {
+      this.props.dispatch(postAnswer(true));
       let targetScore = this.state.score + 10;
       this.setState({
         userAnswer,
@@ -31,7 +33,8 @@ class Game extends React.Component {
       }, ()=> console.log(targetScore) ); 
     } 
     
-    else if(userAnswer !== this.props.answer){
+    else {
+      this.props.dispatch(postAnswer(false));
       let targetScore = this.state.score - 10;
       this.setState({
         userAnswer,
@@ -42,14 +45,12 @@ class Game extends React.Component {
     
     console.log('userAnswer', userAnswer);
     console.log('answer', this.props.answer);
-    // console.log('Your score is: ', targetScore);
 
   }
 
   displayNextQuestion() {
     this.setState({
       message: '',
-      // score: this.state.score
     });
     this.props.dispatch(fetchQuestion());
   }
@@ -90,7 +91,6 @@ const mapStateToProps = state => {
   if (state.game.question) {
     return {
       answer: state.game.question.scientist.name,
-      // score: state.score
     }
   } else {
     return {};
