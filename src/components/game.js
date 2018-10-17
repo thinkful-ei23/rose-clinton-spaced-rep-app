@@ -21,27 +21,28 @@ class Game extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     const userAnswer = this.userAnswer.value.trim();
-    this.setState({
-      userAnswer,
-    });
 
     if(userAnswer === this.props.answer) {
+      let targetScore = this.state.score + 10;
       this.setState({
-        score: this.state.score + 10,
-        message: `Correct! You scored 10 points! Your score is now ${this.state.score}`
-      });
+        userAnswer,
+        score: targetScore,
+        message: `Correct! You scored 10 points! Your score is now ${targetScore}`
+      }, ()=> console.log(targetScore) ); 
     } 
     
     else if(userAnswer !== this.props.answer){
+      let targetScore = this.state.score - 10;
       this.setState({
-        score: this.state.score - 10,
+        userAnswer,
+        score: targetScore,
         message:`You said: "${userAnswer}". The correct answer is: "${this.props.answer}"`
-      }); 
+      }, ()=> console.log(targetScore)); 
     }
-
+    
     console.log('userAnswer', userAnswer);
     console.log('answer', this.props.answer);
-    console.log('Your score is: ', this.state.score);
+    // console.log('Your score is: ', targetScore);
 
   }
 
