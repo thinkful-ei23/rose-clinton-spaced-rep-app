@@ -1,17 +1,22 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
+import requiresLogin from './requires-login';
 
 export class Progress extends React.Component {
 
   render() {
-
+    let percentage
+    if(this.props.correct || this.props.incorrect) {
+       percentage = (this.props.correct / (this.props.correct + this.props.incorrect)).toFixed(2)*100      
+    }
     return (
     <main> 
-      <h1>Your Progress: </h1>
-        <p>Total correct: </p>
-        <p>Total incorrect: </p>
-        <p>Percentage: </p>
+      <h2>Your Progress: </h2>
+        <p>Total correct: {this.props.correct}</p>
+        <p>Total incorrect: {this.props.incorrect}</p>
+        <p>Percentage: {percentage} %
+        </p>
         <Link to ="/dashboard">
         <button className="back-button">
           Back
@@ -23,10 +28,9 @@ export class Progress extends React.Component {
   }
 }
 
-//back button to go back to game 
-
 const mapStateToProps = state => ({
-  //
+    correct: state.game.correct,
+    incorrect: state.game.incorrect,
 });
 
-export default connect(mapStateToProps)(Progress);
+export default requiresLogin()(connect(mapStateToProps)(Progress));

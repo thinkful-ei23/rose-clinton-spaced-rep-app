@@ -100,9 +100,9 @@ export const fetchProgress = () => (dispatch, getState) => {
     }
     return res.json();
   }).then(progress => {
-    dispatch(fetchQuestionSuccess(progress));
+    dispatch(fetchProgressSuccess(progress));
   }).catch(err => {
-      dispatch(fetchQuestionError(err));
+      dispatch(fetchProgressError(err));
   }); 
 };
 

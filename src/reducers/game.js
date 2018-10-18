@@ -37,7 +37,7 @@ export default function questionReducer(state=initialState, action) {
     case actions.FETCH_PROGRESS_REQUEST:
       return {...state, loading : true};
     case actions.FETCH_PROGRESS_SUCCESS:
-      return {...state, error: null, loading: false};
+      return {...state, score: action.progress.score, correct: action.progress.correct, incorrect: action.progress.incorrect, error: null, loading: false};
     case actions.FETCH_PROGRESS_ERROR:
       return {...state, loading: false, error: action.error};    
     default:
