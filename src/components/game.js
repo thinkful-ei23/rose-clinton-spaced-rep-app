@@ -20,6 +20,7 @@ class Game extends React.Component {
   }
 
 
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -75,6 +76,7 @@ class Game extends React.Component {
         </form>
       )
     }
+
     
     return (
     <main className="game">
