@@ -19,11 +19,8 @@ class Game extends React.Component {
     this.props.dispatch(fetchProgress());
   }
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 4b40bc6cc6f4547197cd83bb59e686c888654d94
   onSubmit(e) {
     e.preventDefault();
 
