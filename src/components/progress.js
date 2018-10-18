@@ -9,12 +9,9 @@ export class Progress extends React.Component {
     return (
     <main> 
       <h1>Your Progress: </h1>
-      <h2>This Session: </h2>
         <p>Total correct: </p>
         <p>Total incorrect: </p>
-      <h2>Overall Progress: </h2>
-        <p>Total correct: </p>
-        <p>Total incorrect: </p>
+        <p>Percentage: </p>
         <Link to ="/dashboard">
         <button className="back-button">
           Back
@@ -29,8 +26,7 @@ export class Progress extends React.Component {
 //back button to go back to game 
 
 const mapStateToProps = state => ({
-  numCorrect: state.numCorrect,
-  numIncorrect: state.numIncorrect,
+  //
 });
 
 export default connect(mapStateToProps)(Progress);

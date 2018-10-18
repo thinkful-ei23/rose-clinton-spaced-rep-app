@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchQuestion, postAnswer} from '../actions/game';
+import {fetchQuestion, postAnswer, fetchProgress, postProgress } from '../actions/game';
 import Question from './question';
 import { Link } from 'react-router-dom';
 
@@ -16,7 +16,9 @@ class Game extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(fetchQuestion()); 
+    this.props.dispatch(postProgress()); 
   }
+
 
   onSubmit(e) {
     e.preventDefault();
@@ -54,6 +56,10 @@ class Game extends React.Component {
     });
     this.props.dispatch(fetchQuestion());
   }
+
+  displayProgress() {
+    this.props.dispatch(fetchProgress());
+  }
   
   render() {
     let answer;
@@ -78,7 +84,7 @@ class Game extends React.Component {
         Next Question
       </button>
       <Link to ="/progress">
-        <button className="progress-button">
+        <button className="progress-button" onClick={() =>this.displayProgress()}>
           Progress
         </button>
       </Link>
@@ -88,7 +94,7 @@ class Game extends React.Component {
 }
 
 const mapStateToProps = state => {
-  if (state.game.question) {
+  if (state.game.question) { //check if question loaded on client side
     return {
       answer: state.game.question.scientist.name,
     }
