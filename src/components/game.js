@@ -15,32 +15,43 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchQuestion()); 
-    this.props.dispatch(postProgress()); 
+    this.props.dispatch(fetchQuestion());
+    this.props.dispatch(fetchProgress());
   }
-
 
   onSubmit(e) {
     e.preventDefault();
 
     const userAnswer = this.userAnswer.value.trim();
     
-    if(userAnswer === this.props.answer) {
+    if (userAnswer === this.props.answer) {
       this.props.dispatch(postAnswer(true));
-      let targetScore = this.state.score + 10;
+      let targetScore = this.props.score + 10;
+      let targetCorrect = this.props.correct + 1;
+      const data = {
+        correct: targetCorrect,
+        incorrect: this.props.incorrect,
+        score: targetScore
+      }
+      this.props.dispatch(postProgress(data));
       this.setState({
         userAnswer,
-        score: targetScore,
         message: `Correct! You scored 10 points! Your score is now ${targetScore}`
-      }, ()=> console.log(targetScore) ); 
+      }, ()=> console.log(targetScore) );
     } 
     
     else {
       this.props.dispatch(postAnswer(false));
-      let targetScore = this.state.score - 10;
+      let targetScore = this.props.score - 10;
+      let targetIncorrect = this.props.incorrect + 1;
+      const data = {
+        correct: this.props.correct,
+        incorrect: targetIncorrect,
+        score: targetScore
+      }
+      this.props.dispatch(postProgress(data));
       this.setState({
         userAnswer,
-        score: targetScore,
         message:`You said: "${userAnswer}". The correct answer is: "${this.props.answer}"`
       }, ()=> console.log(targetScore)); 
     }
@@ -94,12 +105,15 @@ class Game extends React.Component {
 }
 
 const mapStateToProps = state => {
-  if (state.game.question) { //check if question loaded on client side
-    return {
-      answer: state.game.question.scientist.name,
-    }
-  } else {
-    return {};
+  let answer;
+  if (state.game.question.scientist) { //check if question loaded on client side
+    answer = state.game.question.scientist.name;
+  }
+  return {
+    answer,
+    correct: state.game.correct,
+    incorrect: state.game.incorrect,
+    score: state.game.score
   }
 }
 

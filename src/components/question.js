@@ -22,7 +22,7 @@ export class Question extends React.Component {
   }
   
   const mapStateToProps = state => {
-    if (state.game.question) {
+    if (state.game.question.scientist) {
       return {
         photo: state.game.question.scientist.photo,
         info: state.game.question.scientist.info
