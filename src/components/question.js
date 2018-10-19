@@ -15,11 +15,12 @@ export class Question extends React.Component {
     if(this.props.attr) {
       attr = this.props.attr;
     }
+    
     return (
       <section className="question">
         <img src={photo} alt={info}/>
         <p>{info}</p>
-        <p>Attribution: {attr}</p>
+        <p className="attr">Attribution: {attr}</p>
       </section>
       );
     }
@@ -30,7 +31,7 @@ export class Question extends React.Component {
       return {
         photo: state.game.question.scientist.photo,
         info: state.game.question.scientist.info,
-        attr: state.game.question.scientist.attr
+        attr: state.game.question.scientist.attr,
       }
     } else {
       return {};
