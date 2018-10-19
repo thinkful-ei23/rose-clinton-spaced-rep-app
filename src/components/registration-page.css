@@ -1,0 +1,12 @@
+.home h2 {
+  background-color: #4C5454;
+  border-radius: 8px;
+  color: white;
+  display: inline-block;
+  font-weight: normal;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  /* margin-top: 20px; */
+  margin-bottom: 20px;
+}

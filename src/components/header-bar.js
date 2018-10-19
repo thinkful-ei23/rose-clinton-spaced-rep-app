@@ -46,12 +46,12 @@ export class HeaderBar extends React.Component {
       );
     }
     return (
-      <main>
+      <header>
         <div className="header-bar">
           <h1>Un-Hidden Figures</h1>
         </div>
         {logOutDisplay}
-      </main>
+      </header>
     );
   }
 }
