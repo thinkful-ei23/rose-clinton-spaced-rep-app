@@ -19,8 +19,6 @@ class Game extends React.Component {
     this.props.dispatch(fetchProgress());
   }
 
-
-
   onSubmit(e) {
     e.preventDefault();
 
@@ -89,7 +87,6 @@ class Game extends React.Component {
       )
     }
 
-    
     return (
     <main className="game">
       <Question />

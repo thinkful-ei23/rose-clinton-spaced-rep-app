@@ -5,17 +5,21 @@ import './question.css';
 
 export class Question extends React.Component {
   render() {
-    let photo, info;
+    let photo, info, attr;
     if (this.props.photo) {
       photo = this.props.photo;
     }
     if (this.props.info) {
       info = this.props.info;
     }
+    if(this.props.attr) {
+      attr = this.props.attr;
+    }
     return (
       <section className="question">
         <img src={photo} alt={info}/>
         <p>{info}</p>
+        <p>Attribution: {attr}</p>
       </section>
       );
     }
@@ -25,7 +29,8 @@ export class Question extends React.Component {
     if (state.game.question.scientist) {
       return {
         photo: state.game.question.scientist.photo,
-        info: state.game.question.scientist.info
+        info: state.game.question.scientist.info,
+        attr: state.game.question.scientist.attr
       }
     } else {
       return {};

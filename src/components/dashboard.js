@@ -27,10 +27,6 @@ export class Dashboard extends React.Component {
         <p className="display-username">
           Hello, {name}!
         </p>
-        
-        <p className="display-score">
-          {/* Your score is: {this.props.score} */}
-        </p>
 
         <Game />
       </div>
