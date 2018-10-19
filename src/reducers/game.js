@@ -12,10 +12,16 @@ const initialState = {
   score: 0,
   correct: 0, 
   incorrect: 0,
+  showProgress: false
 }
 
 export default function questionReducer(state=initialState, action) {
   switch (action.type) {
+    case actions.TOGGLE_PROGRESS:
+      const show = state.showProgress;
+      return {...state, showProgress: !show};
+    case actions.CLEAR_GAME:
+      return {...initialState};
     case actions.FETCH_QUESTION_REQUEST:
       return {...state, loading : true};
     case actions.FETCH_QUESTION_SUCCESS:

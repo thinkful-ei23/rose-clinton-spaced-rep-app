@@ -1,13 +1,66 @@
 .header-bar {
   text-align: center;
-  margin: 0 auto;
-  width: 30em;
 }
 
-.logout-button{
-  text-align: center;
+.header-bar h1 {
+  color: rgb(76, 84, 84);
 }
+
+.nav {
+  margin-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.nav h2 {
+  font-weight: normal;
+  font-size: 1em;
+  min-width: 300px;
+}
+
+.score {
+  display: inline;
+  text-align: left;
+}
+
+.buttons {
+  padding-top: 14px;
+  text-align: center;
+  min-width: 210px;
+}
+
+.buttons button {
+  background: #00BEA7;
+  color: white;
+  font-size: 0.85em;
+  border: solid 1px gray;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.progress-button {
+  margin-right: 10px;
+}
+
 
 .logout-msg {
+  display: block;
   text-align: center;
+}
+
+.aqua {
+  color: #00BEA7;
+}
+
+@media screen and (min-width: 600px) {
+  .nav {
+    display: flex;
+  }
+  .nav h2,
+  .buttons {
+    flex: 1
+  }
+  .buttons {
+    text-align: right;
+  }
 }

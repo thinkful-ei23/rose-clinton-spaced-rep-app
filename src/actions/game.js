@@ -1,5 +1,15 @@
 import {API_BASE_URL} from '../config';
 
+export const TOGGLE_PROGRESS = 'TOGGLE_PROGRESS';
+export const toggleProgress = () => ({
+  type: TOGGLE_PROGRESS
+});
+
+export const CLEAR_GAME = 'CLEAR_GAME';
+export const clearGame = () => ({
+  type: CLEAR_GAME
+});
+
 export const FETCH_QUESTION_REQUEST = 'FETCH_QUESTION_REQUEST';
 export const fetchQuestionRequest = () => ({
   type: FETCH_QUESTION_REQUEST
@@ -56,8 +66,9 @@ export const fetchProgressRequest = () => ({
 });
 
 export const FETCH_PROGRESS_SUCCESS = 'FETCH_PROGRESS_SUCCESS';
-export const fetchProgressSuccess = () => ({
-  type: FETCH_PROGRESS_SUCCESS, 
+export const fetchProgressSuccess = (progress) => ({
+  type: FETCH_PROGRESS_SUCCESS,
+  progress
 });
 
 export const FETCH_PROGRESS_ERROR = 'FETCH_PROGRESS_ERROR';

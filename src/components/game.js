@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchQuestion, postAnswer, fetchProgress, postProgress } from '../actions/game';
+import requiresLogin from './requires-login';
+import {fetchQuestion, postAnswer, fetchProgress, postProgress, toggleProgress } from '../actions/game';
 import Question from './question';
-import { Link } from 'react-router-dom';
+import './game.css';
 
-class Game extends React.Component {
+export class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,9 +22,7 @@ class Game extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-
     const userAnswer = this.userAnswer.value.trim();
-    
     if (userAnswer === this.props.answer) {
       this.props.dispatch(postAnswer(true));
       let targetScore = this.props.score + 10;
@@ -36,11 +35,11 @@ class Game extends React.Component {
       this.props.dispatch(postProgress(data));
       this.setState({
         userAnswer,
-        message: `Correct! You scored 10 points! Your score is now ${targetScore}`
-      }, ()=> console.log(targetScore) );
-    } 
-    
-    else {
+        message: (
+          <p>Correct! You scored 10 points!</p>
+        )
+      }/*, ()=> console.log(targetScore)*/ );
+    } else {
       this.props.dispatch(postAnswer(false));
       let targetScore = this.props.score - 10;
       let targetIncorrect = this.props.incorrect + 1;
@@ -52,13 +51,22 @@ class Game extends React.Component {
       this.props.dispatch(postProgress(data));
       this.setState({
         userAnswer,
-        message:`You said: "${userAnswer}". The correct answer is: "${this.props.answer}"`
-      }, ()=> console.log(targetScore)); 
-    }
-    
-    console.log('userAnswer', userAnswer);
-    console.log('answer', this.props.answer);
-
+        message: (
+          <div>
+            <p>
+              You said:<br/>
+              <span className="aqua">{userAnswer}</span>
+            </p>
+            <p>
+              The correct answer is:<br/>
+              <span className="aqua">{this.props.answer}</span>
+            </p>
+          </div>
+          )
+      }/*, ()=> console.log(targetScore)*/); 
+    }  
+    // console.log('userAnswer', userAnswer);
+    // console.log('answer', this.props.answer);
   }
 
   displayNextQuestion() {
@@ -68,22 +76,47 @@ class Game extends React.Component {
     this.props.dispatch(fetchQuestion());
   }
 
-  displayProgress() {
-    this.props.dispatch(fetchProgress());
+  handleBack() {
+    this.props.dispatch(toggleProgress());
   }
   
   render() {
     let answer;
-    if (this.state.message) {
+    if (this.props.showProgress) {
+      let percentage
+      if (this.props.correct || this.props.incorrect) {
+        percentage = ((this.props.correct / (this.props.correct + this.props.incorrect)).toFixed(2)*100) + '%';
+      }
       answer = (
-        <p>{this.state.message}</p>
+        <section id="progress" className="answer">
+          <h2>Your Progress: </h2>
+          <p>Total correct:&nbsp; <span className="aqua">{this.props.correct}</span></p>
+          <p>Total incorrect:&nbsp; <span className="aqua">{this.props.incorrect}</span></p>
+          <p>Percentage:&nbsp; <span className="aqua">{percentage}</span>
+          </p>
+          <button className="back-button" onClick={() => this.handleBack()}>
+            Back to Game
+          </button>
+        </section> 
+      );
+    } else if (this.state.message) {
+      answer = (
+        <section className="answer">
+          {this.state.message}
+          <button className="next-button" onClick={() =>this.displayNextQuestion()}>
+            Next Question
+          </button>
+        </section>
       );
     } else {
       answer = (
-        <form onSubmit={e => this.onSubmit(e)}>
-          <input type="text" ref={input => this.userAnswer = input}/>
-          <button type="submit">Submit</button>
-        </form>
+        <section className="answer">
+          <form onSubmit={e => this.onSubmit(e)}>
+            <label htmlFor="answer">Who is it?</label>
+            <input id="answer" type="text" ref={input => this.userAnswer = input}/>
+            <button type="submit">Submit</button>
+          </form>
+        </section>
       )
     }
 
@@ -91,14 +124,6 @@ class Game extends React.Component {
     <main className="game">
       <Question />
       {answer}
-      <button className="next-button" onClick={() =>this.displayNextQuestion()}>
-        Next Question
-      </button>
-      <Link to ="/progress">
-        <button className="progress-button" onClick={() =>this.displayProgress()}>
-          Progress
-        </button>
-      </Link>
     </main>
     );
   }
@@ -113,8 +138,10 @@ const mapStateToProps = state => {
     answer,
     correct: state.game.correct,
     incorrect: state.game.incorrect,
-    score: state.game.score
+    score: state.game.score,
+    showProgress: state.game.showProgress
   }
-}
+};
 
-export default connect(mapStateToProps)(Game);
+export default requiresLogin()(connect(mapStateToProps)(Game));
+  

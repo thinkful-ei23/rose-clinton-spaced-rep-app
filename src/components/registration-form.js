@@ -50,7 +50,7 @@ export class RegistrationForm extends React.Component {
                 />
                 <button
                     type="submit"
-                    disabled={this.props.pristine || this.props.submitting}>
+                    disabled={!this.props.valid || this.props.submitting}>
                     Register
                 </button>
             </form>

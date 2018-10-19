@@ -1,7 +1,11 @@
 .question {
+  flex: 1;
   text-align: center;
+  max-width: min-content;
+  margin: auto;
 }
 
 .question img {
+  border-radius: 8px;
   width: 200px;
 }
