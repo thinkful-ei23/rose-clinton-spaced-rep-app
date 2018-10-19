@@ -1,6 +1,5 @@
 .home {
   text-align: center;
-  /* background: turquoise; */
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -36,8 +35,14 @@
   margin-bottom: 20px;
 }
 
+.instructions h2 {
+  font-weight: normal;
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+
 footer {
-  color: lightgray;
+  color: rgb(118, 118, 118);
   font-size: 9px;
   /* position: absolute;
   bottom: 0px; */
@@ -47,7 +52,7 @@ footer {
 }
 
 footer a {
-  color: rgb(175, 175, 175);
+  color: rgb(118, 118, 118);
 }
 
 @media only screen and (min-width: 650px) {

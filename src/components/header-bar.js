@@ -49,28 +49,26 @@ export class HeaderBar extends React.Component {
     let nav;
     if (this.props.loggedIn) {
       nav = (
-        <nav className="nav">
+        <section className="dash">
           <h2 className="score">
-            Hello, <span className="aqua">{name}</span>! &nbsp; Your current score is: <span className="aqua">{this.props.score}</span>
+            Hello, <span className="aqua big">{name}</span>! &nbsp; Your current score is: <span className="aqua big">{this.props.score}</span>
           </h2>
-          <div className="buttons">
-            {/* <Link to ="/progress"> */}
+          <nav>
             <button className="progress-button" onClick={() => this.handleProgress()}>
               See Your Progress
             </button>
-            {/* </Link> */}
             <button onClick={() => this.logOut()}>
               Log out
             </button>
-          </div>
-        </nav>
+          </nav>
+        </section>
       );
     }
     if (this.state.logoutMsg) {
       nav = (
-        <nav className="nav">
+        <section className="dash">
           <h2 className="logout-msg">{this.state.logoutMsg}</h2>
-        </nav>
+        </section>
       );
     }
     return (

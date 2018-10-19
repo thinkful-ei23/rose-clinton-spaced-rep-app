@@ -1,3 +1,7 @@
+fieldset {
+  border: none;
+}
+
 .login-form {
   text-align: left;
   padding-bottom: 20px;
@@ -24,7 +28,7 @@
 .login-form button {
   display: block;
   font-size: 1em;
-  border: solid 1px gray;
+  border: solid 1px lightgray;
   border-radius: 8px;
   width: 50%;
   height: 29px;
@@ -34,7 +38,15 @@
 }
 
 .login-form button:enabled {
-  background: #00BEA7;
+  background: none;
+  border: 1px solid #35A1AE;
+  color: rgb(76, 84, 84);
+}
+
+.login-form button:enabled:hover,
+.login-form button:enabled:focus,
+.login-form button:enabled:active {
+  background: #35A1AE;
   color: white;
 }
 

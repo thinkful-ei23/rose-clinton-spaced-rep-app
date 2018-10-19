@@ -13,8 +13,8 @@ export function LandingPage(props) {
   }
   
   return (
-    <div className="home">
-      <main>
+    <React.Fragment>
+      <main className="home">
         <section className="landing-images">
           <img src="https://i.imgur.com/lDSyVJa.png" 
           alt="Female Teacher"/>
@@ -24,7 +24,7 @@ export function LandingPage(props) {
           alt="Female Scientist"/>
         </section>
         <section className="instructions">
-          <h3>Instructions</h3>
+          <h2>Instructions</h2>
           <p>
             See if you can identify these top women scientists.
           </p>
@@ -41,7 +41,7 @@ export function LandingPage(props) {
       <footer>
         Icons made by <a href="https://www.flaticon.com/authors/roundicons" title="Roundicons">Roundicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank" rel="noopener noreferrer">CC 3.0 BY</a>
       </footer>
-    </div>
+    </React.Fragment>
     );
   }
   

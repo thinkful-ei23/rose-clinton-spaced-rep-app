@@ -61,7 +61,7 @@ export class Game extends React.Component {
       this.setState({
         userAnswer,
         message: (
-          <div>
+          <React.Fragment>
             <p>
               You said:<br/>
               <span className="aqua">{userAnswer}</span>
@@ -72,9 +72,9 @@ export class Game extends React.Component {
               <br></br>
               <a href={this.props.link} target="_blank" rel="noopener noreferrer">Learn more at Wikipedia</a>
             </p>
-          </div>
-          )
-      }); 
+          </React.Fragment>
+        )
+      });
     }  
   }
 
@@ -122,7 +122,7 @@ export class Game extends React.Component {
         <section className="answer">
           <form onSubmit={e => this.onSubmit(e)}>
             <label htmlFor="answer">Who is it?</label>
-            <input id="answer" type="text" ref={input => this.userAnswer = input}/>
+            <input id="answer" type="text" autoComplete="off" ref={input => this.userAnswer = input}/>
             <button type="submit">Submit</button>
           </form>
         </section>
