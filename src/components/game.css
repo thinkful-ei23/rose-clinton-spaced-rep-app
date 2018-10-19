@@ -7,6 +7,14 @@
   align-items: center;
 }
 
+
+.link {
+  font-size: 12px;
+  margin-top: 10px;
+  justify-content: center;
+  text-align: center;
+}
+
 .answer {
   flex: 1;
   max-width: 300px;

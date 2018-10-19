@@ -11,7 +11,8 @@ export class Game extends React.Component {
     this.state = {
       message: '',
       userAnswer: '',
-      score: 0
+      score: 0,
+      link: <a href="{this.state.link}">Link</a>
     }
   }
 
@@ -30,7 +31,8 @@ export class Game extends React.Component {
       const data = {
         correct: targetCorrect,
         incorrect: this.props.incorrect,
-        score: targetScore
+        score: targetScore,
+        // link: this.props.link
       }
       this.props.dispatch(postProgress(data));
       this.setState({
@@ -38,10 +40,17 @@ export class Game extends React.Component {
         message: (
           <p>Correct! You scored 10 points!</p>
         )
-      }/*, ()=> console.log(targetScore)*/ );
-    } else {
+      });
+    } else if (userAnswer !== this.props.answer){
       this.props.dispatch(postAnswer(false));
-      let targetScore = this.props.score - 10;
+
+      let targetScore;
+      if(this.props.score > 10) {
+        targetScore = this.props.score - 10;
+      } else {
+        targetScore = 0; 
+      }  
+
       let targetIncorrect = this.props.incorrect + 1;
       const data = {
         correct: this.props.correct,
@@ -60,13 +69,13 @@ export class Game extends React.Component {
             <p>
               The correct answer is:<br/>
               <span className="aqua">{this.props.answer}</span>
+              <br></br>
+              <a href={this.props.link} target="_blank" rel="noopener noreferrer">Learn more at Wikipedia</a>
             </p>
           </React.Fragment>
         )
-      }/*, ()=> console.log(targetScore)*/); 
+      });
     }  
-    // console.log('userAnswer', userAnswer);
-    // console.log('answer', this.props.answer);
   }
 
   displayNextQuestion() {
@@ -130,16 +139,23 @@ export class Game extends React.Component {
 }
 
 const mapStateToProps = state => {
-  let answer;
+  let answer, link;
+  let displayLink = <p href="{link}"></p>
+ 
   if (state.game.question.scientist) { //check if question loaded on client side
     answer = state.game.question.scientist.name;
+  }
+  if (state.game.question.scientist) {
+    link = state.game.question.scientist.link
   }
   return {
     answer,
     correct: state.game.correct,
     incorrect: state.game.incorrect,
     score: state.game.score,
-    showProgress: state.game.showProgress
+    showProgress: state.game.showProgress,
+    link,
+    displayLink
   }
 };
 
