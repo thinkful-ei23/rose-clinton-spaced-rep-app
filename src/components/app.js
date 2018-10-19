@@ -3,9 +3,8 @@ import {connect} from 'react-redux';
 import {Route, withRouter} from 'react-router-dom';
 import HeaderBar from './header-bar';
 import LandingPage from './landing-page';
-import Dashboard from './dashboard';
+import Game from './game';
 import RegistrationPage from './registration-page';
-import Progress from './progress';
 import {refreshAuthToken} from '../actions/auth';
 import './app.css';
 
@@ -44,9 +43,8 @@ export class App extends React.Component {
       <div className="app">
         <HeaderBar />
         <Route exact path="/" component={LandingPage} />
-        <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/dashboard" component={Game} />
         <Route exact path="/register" component={RegistrationPage} />
-        <Route exact path="/progress" component={Progress} />
       </div>
     );
   }
