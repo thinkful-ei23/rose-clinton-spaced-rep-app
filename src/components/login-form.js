@@ -27,25 +27,27 @@ export class LoginForm extends React.Component {
                     this.onSubmit(values)
                 )}>
                 {error}
-                <Field
-                    component={Input}
-                    label="Username"
-                    type="text"
-                    name="username"
-                    id="username"
-                    validate={[required, nonEmpty]}
-                />
-                <Field
-                    component={Input}
-                    label="Password"
-                    type="password"
-                    name="password"
-                    id="password"
-                    validate={[required, nonEmpty]}
-                />
-                <button className="log-in" disabled={!this.props.valid || this.props.submitting}>
-                    Log in
-                </button>
+                <fieldset>
+                    <Field
+                        component={Input}
+                        label="Username"
+                        type="text"
+                        name="username"
+                        id="username"
+                        validate={[required, nonEmpty]}
+                    />
+                    <Field
+                        component={Input}
+                        label="Password"
+                        type="password"
+                        name="password"
+                        id="password"
+                        validate={[required, nonEmpty]}
+                    />
+                    <button className="log-in" disabled={!this.props.valid || this.props.submitting}>
+                        Log in
+                    </button>
+                </fieldset>
             </form>
         );
     }

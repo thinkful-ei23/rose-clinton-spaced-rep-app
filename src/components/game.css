@@ -7,10 +7,6 @@
   align-items: center;
 }
 
-/* .progress {
-
-} */
-
 .answer {
   flex: 1;
   max-width: 300px;
@@ -49,13 +45,24 @@
 .answer button {
   display: block;
   font-size: 1em;
-  border: none;
+  border: 1px solid #35A1AE;
   border-radius: 8px;
   width: 50%;
   height: 29px;
   margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
-  background: #00BEA7;
+  background: none;
   color: white;
+}
+
+.answer button:hover,
+.answer button:active,
+.answer button:focus {
+  background: #35A1AE;
+  color: white;
+}
+
+.answer .aqua {
+  color: #75E3EF;
 }
