@@ -70,7 +70,9 @@ export class Game extends React.Component {
               The correct answer is:<br/>
               <span className="aqua">{this.props.answer}</span>
               <br></br>
+              <span className="info-link">
               <a href={this.props.link} target="_blank" rel="noopener noreferrer">Learn more at Wikipedia</a>
+              </span>
             </p>
           </React.Fragment>
         )

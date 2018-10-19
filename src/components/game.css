@@ -21,7 +21,12 @@ a:-webkit-any-link:hover{
 }
 
 a:-webkit-any-link {
-  color:white;
+  color:black;
+}
+
+.info-link a:-webkit-any-link {
+  color: white;
+  font-size: 15px;
 }
 
 .answer {
