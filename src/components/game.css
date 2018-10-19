@@ -13,6 +13,15 @@
   margin-top: 10px;
   justify-content: center;
   text-align: center;
+  
+}
+
+a:-webkit-any-link:hover{
+  color: #35A1AE;
+}
+
+a:-webkit-any-link {
+  color:white;
 }
 
 .answer {
