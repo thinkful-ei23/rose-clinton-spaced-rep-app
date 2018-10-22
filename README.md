@@ -81,10 +81,10 @@ To clone the repo to your local development environment, execute the following c
 
 ```sh
 # Clone the repo
-git clone https://github.com/clintonowen/kando-mvp-client.git
+git clone https://github.com/thinkful-ei23/rose-clinton-spaced-rep-client.git
 
 # Move into the project directory
-cd kando-mvp-client
+cd rose-clinton-spaced-rep-client
 
 # Install dependencies (in /node_modules/)
 npm i
