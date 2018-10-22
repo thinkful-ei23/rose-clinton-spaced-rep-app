@@ -88,9 +88,9 @@ cd kando-mvp-client
 
 # Install dependencies (in /node_modules/)
 npm i
-
+<!-- 
 # Run the test-suite:
-npm test
+npm test -->
 
 # Run the app:
 npm start
@@ -121,7 +121,7 @@ npm start
 
 ## Authors
 
-* Clinton Owen – [@CoderClint](https://twitter.com/CoderClint) │ clint@clintonowen.com │ [https://github.com/clintonowen](https://github.com/clintonowen)
+* Clinton Owen – clint@clintonowen.com │ [https://github.com/clintonowen](https://github.com/clintonowen) │ [@CoderClint](https://twitter.com/CoderClint)
 * Rose Sorfa – rsorfa@gmail.com │ [https://github.com/Slinkys](https://github.com/Slinkys)
 
 <!-- Markdown link & img dfn's -->
